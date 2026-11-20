@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRADE QUEST: Misi Menjelajahi Dunia Perdagangan - Media Pembelajaran Ekonomi SMA Kelas X</title>
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'><path d='M3 3h18v2H3V3zm0 16h18v2H3v-2zm1-5h16l-2-6H6l-2 6zm4-4h8l1 3H7l1-3z'/></svg>">
+
+  <!-- Stylesheet CSS Murni -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION BAR
+       ========================================================================== -->
+  <header class="main-header">
+    <div class="container navbar">
+      <!-- Brand Logo -->
+      <div class="brand-logo" onclick="navigateTo('home')" title="Kembali ke Beranda">
+        <div class="logo-icon-wrap">
+          <!-- Ship & Globe SVG Icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span class="brand-name">TRADE <span>QUEST</span></span>
+          <span class="brand-sub">EKONOMI KELAS X SMA</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu Desktop (6 Halaman Utama) -->
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <button id="nav-home" class="active" onclick="navigateTo('home')">
+              <span>🏠</span> Beranda
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="nav-explore" onclick="navigateTo('explore')">
+              <span>📖</span> Explore
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="nav-tradelab" onclick="navigateTo('tradelab')">
+              <span>⚖️</span> Trade Lab
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="nav-challenge" onclick="navigateTo('challenge')">
+              <span>🎮</span> Challenge Zone
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="nav-finalmission" onclick="navigateTo('finalmission')">
+              <span>🎯</span> Final Mission
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="nav-achievement" onclick="navigateTo('achievement')">
+              <span>🏆</span> Achievement
+            </button>
+          </li>
+          <li class="nav-item">
+            <button id="nav-profile" onclick="navigateTo('profile')">
+              <span>👩‍🏫</span> Profil Guru
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (XP, Sound Toggle, Reset, Mobile Menu) -->
+      <div class="nav-actions">
+        <!-- XP Indicator -->
+        <div class="xp-badge" onclick="navigateTo('achievement')" title="Klik untuk melihat status Peringkat & Badge">
+          <span>⭐</span>
+          <span id="navXpDisplay">0 XP</span>
+        </div>
+
+        <!-- Audio Toggle Button -->
+        <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Nyalakan/Matikan Efek Suara">
+          <span id="soundIcon">🔊</span>
+        </button>
+
+        <!-- Reset Button -->
+        <button class="icon-btn" onclick="openModal('resetModal')" title="Reset Progres Belajar">
+          <span>🔄</span>
+        </button>
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="icon-btn mobile-menu-btn" onclick="toggleMobileNav()" title="Menu">
+          <span>☰</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-nav" id="mobileNavDrawer">
+      <button id="mob-home" class="active" onclick="navigateTo('home')">🏠 Beranda</button>
+      <button id="mob-explore" onclick="navigateTo('explore')">📖 Explore (Modul & Video)</button>
+      <button id="mob-tradelab" onclick="navigateTo('tradelab')">⚖️ Trade Lab (Simulasi Menteri)</button>
+      <button id="mob-challenge" onclick="navigateTo('challenge')">🎮 Challenge Zone (4 Game)</button>
+      <button id="mob-finalmission" onclick="navigateTo('finalmission')">🎯 Final Mission (Evaluasi)</button>
+      <button id="mob-achievement" onclick="navigateTo('achievement')">🏆 Achievement (10 Badges)</button>
+      <button id="mob-profile" onclick="navigateTo('profile')">👩‍🏫 Profil Guru (Pengembang)</button>
+    </div>
+    <!-- Mobile Nav Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="toggleMobileNav()"></div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER (SPA VIEWS)
+       ========================================================================== -->
+  <main class="container">
+
+    <!-- ========================================================================
+         VIEW 1: HOME (Halaman Pembuka, Petunjuk, Progres Belajar, Tombol Mulai)
+         ======================================================================== -->
+    <section id="view-home" class="page-view active-view">
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge-pill">
+              <span class="pulse-dot"></span>
+              Media Pembelajaran Interaktif (MPI)
+            </div>
+            <h1 class="hero-title">
+              Misi Menjelajahi <br>
+              <span class="highlight-gold">Dunia Perdagangan</span>
+            </h1>
+            <p class="hero-subtitle">
+              Selamat datang di <strong>TRADE QUEST</strong>! Masuki petualangan seru memahami konsep ekspor-impor, kebijakan tarif & proteksionisme, serta peran Indonesia dalam pasar global melalui simulasi kebijakan, game interaktif, dan tantangan misi berjenjang.
+            </p>
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 9999px; font-size: 0.78rem; color: #fde68a; margin-bottom: 22px;">
+              <span>👩‍🏫</span> Disusun oleh: <strong>Akfini Gina Afafa</strong> (Universitas Pendidikan Ganesha)
+            </div>
+            <div class="hero-cta-group">
+              <button class="btn btn-gold" onclick="navigateTo('explore')">
+                <span>🚀</span> Mulai Petualangan
+              </button>
+              <button class="btn btn-outline-white" onclick="navigateTo('tradelab')">
+                <span>🏛️</span> Ruang Simulasi Menteri
+              </button>
+              <button class="btn btn-outline-white" onclick="navigateTo('challenge')">
+                <span>🎮</span> Mainkan Game Edukasi
+              </button>
+              <button class="btn btn-outline-white" onclick="navigateTo('profile')">
+                <span>👩‍🏫</span> Profil Guru
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Vector Art: Cargo Ship, Shipping Containers & World Globe -->
+          <div class="hero-art-container">
+            <svg class="hero-art-svg" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- World Map Background Dot Grid & Arcs -->
+              <circle cx="250" cy="200" r="160" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4 6" opacity="0.4"/>
+              <ellipse cx="250" cy="200" rx="160" ry="60" stroke="#38bdf8" stroke-width="1" stroke-dasharray="3 5" opacity="0.4"/>
+              <path d="M90 200 C 150 120, 350 120, 410 200" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+              
+              <!-- Sea Waves -->
+              <path d="M30 330 C 80 315, 120 340, 180 325 C 240 310, 300 340, 360 325 C 420 310, 460 335, 480 330 L 480 390 L 30 390 Z" fill="#0f2744" opacity="0.9"/>
+              <path d="M10 345 C 70 330, 130 355, 200 340 C 270 325, 340 355, 410 340 C 450 330, 480 345, 500 340 L 500 395 L 10 395 Z" fill="#143154"/>
+              <path d="M0 365 C 60 350, 140 370, 220 355 C 300 340, 380 370, 460 355 C 480 350, 500 360, 510 358 L 510 400 L 0 400 Z" fill="#071527"/>
+
+              <!-- Cargo Ship Hull -->
+              <path d="M110 280 L 140 330 L 370 330 L 410 280 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+              <path d="M110 280 L 410 280 L 390 260 L 130 260 Z" fill="#334155"/>
+              <rect x="330" y="210" width="55" height="50" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+              <rect x="345" y="222" width="25" height="12" rx="2" fill="#38bdf8"/>
+              <!-- Radar Antenna -->
+              <line x1="358" y1="210" x2="358" y2="185" stroke="#f59e0b" stroke-width="2"/>
+              <circle cx="358" cy="183" r="3" fill="#f59e0b"/>
+
+              <!-- Stacked Cargo Containers (Colorful: Blue, Gold, Red, Green) -->
+              <!-- Layer 1 -->
+              <rect x="150" y="235" width="50" height="25" rx="3" fill="#2563eb" stroke="#1d4ed8" stroke-width="1.5"/>
+              <line x1="160" y1="235" x2="160" y2="260" stroke="#1d4ed8" stroke-width="1"/>
+              <line x1="170" y1="235" x2="170" y2="260" stroke="#1d4ed8" stroke-width="1"/>
+              <line x1="180" y1="235" x2="180" y2="260" stroke="#1d4ed8" stroke-width="1"/>
+              <line x1="190" y1="235" x2="190" y2="260" stroke="#1d4ed8" stroke-width="1"/>
+
+              <rect x="205" y="235" width="50" height="25" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+              <line x1="215" y1="235" x2="215" y2="260" stroke="#d97706" stroke-width="1"/>
+              <line x1="225" y1="235" x2="225" y2="260" stroke="#d97706" stroke-width="1"/>
+              <line x1="235" y1="235" x2="235" y2="260" stroke="#d97706" stroke-width="1"/>
+              <line x1="245" y1="235" x2="245" y2="260" stroke="#d97706" stroke-width="1"/>
+
+              <rect x="260" y="235" width="50" height="25" rx="3" fill="#10b981" stroke="#059669" stroke-width="1.5"/>
+              <line x1="270" y1="235" x2="270" y2="260" stroke="#059669" stroke-width="1"/>
+              <line x1="280" y1="235" x2="280" y2="260" stroke="#059669" stroke-width="1"/>
+              <line x1="290" y1="235" x2="290" y2="260" stroke="#059669" stroke-width="1"/>
+              <line x1="300" y1="235" x2="300" y2="260" stroke="#059669" stroke-width="1"/>
+
+              <!-- Layer 2 -->
+              <rect x="175" y="208" width="50" height="25" rx="3" fill="#ef4444" stroke="#dc2626" stroke-width="1.5"/>
+              <line x1="185" y1="208" x2="185" y2="233" stroke="#dc2626" stroke-width="1"/>
+              <line x1="195" y1="208" x2="195" y2="233" stroke="#dc2626" stroke-width="1"/>
+              <line x1="205" y1="208" x2="205" y2="233" stroke="#dc2626" stroke-width="1"/>
+              <line x1="215" y1="208" x2="215" y2="233" stroke="#dc2626" stroke-width="1"/>
+
+              <rect x="230" y="208" width="50" height="25" rx="3" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+              <line x1="240" y1="208" x2="240" y2="233" stroke="#0284c7" stroke-width="1"/>
+              <line x1="250" y1="208" x2="250" y2="233" stroke="#0284c7" stroke-width="1"/>
+              <line x1="260" y1="208" x2="260" y2="233" stroke="#0284c7" stroke-width="1"/>
+              <line x1="270" y1="208" x2="270" y2="233" stroke="#0284c7" stroke-width="1"/>
+
+              <!-- Floating Compass Rose Symbol -->
+              <g transform="translate(80, 80)">
+                <circle cx="0" cy="0" r="28" fill="#143154" stroke="#f59e0b" stroke-width="2"/>
+                <polygon points="0,-22 6,-6 22,0 6,6 0,22 -6,6 -22,0 -6,-6" fill="#f59e0b"/>
+                <polygon points="0,-22 6,-6 0,0 -6,-6" fill="#ffffff"/>
+                <circle cx="0" cy="0" r="3" fill="#1e293b"/>
+                <text x="-4" y="-25" fill="#fde68a" font-size="10" font-weight="bold">N</text>
+              </g>
+
+              <!-- Trade Arrow Arc -->
+              <path d="M370 140 A 100 80 0 0 1 430 230" stroke="#38bdf8" stroke-width="3" fill="none" stroke-dasharray="8 6"/>
+              <polygon points="430,230 436,215 422,220" fill="#38bdf8"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Progress Overview Card -->
+      <div class="progress-summary-card">
+        <div class="progress-info">
+          <h4><span>📊</span> Progres Belajar Mandiri</h4>
+          <p>Selesaikan seluruh modul, simulasi Trade Lab, permainan edukasi, dan ujian akhir untuk mencapai predikat <strong>Master Trader</strong>.</p>
+          <div class="progress-bar-container">
+            <div id="homeProgressBar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <div class="progress-stats-grid">
+          <div class="stat-box">
+            <span class="stat-val" id="homeProgressText">0% Selesai</span>
+            <span class="stat-lbl">Kelengkapan</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="statModulesCount">0/3</span>
+            <span class="stat-lbl">Modul</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="statLabCount">0/4</span>
+            <span class="stat-lbl">Simulasi Lab</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="statBadgesCount">0/10</span>
+            <span class="stat-lbl">Badges</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Petunjuk Penggunaan MPI (Instructions) -->
+      <div class="instructions-card">
+        <h3><span>💡</span> Petunjuk Penggunaan Media Pembelajaran</h3>
+        <div class="guide-steps">
+          <div class="guide-step-item">
+            <div class="step-num">1</div>
+            <h5>Pelajari Explore</h5>
+            <p>Pahami konsep di 3 Modul interaktif yang dilengkapi studi kasus komoditas Indonesia, infografis, dan kuis mini.</p>
+          </div>
+          <div class="guide-step-item">
+            <div class="step-num">2</div>
+            <h5>Simulasi Trade Lab</h5>
+            <p>Berperanlah sebagai Menteri Perdagangan RI untuk mengatasi 4 krisis ekonomi nyata dan amati dampaknya.</p>
+          </div>
+          <div class="guide-step-item">
+            <div class="step-num">3</div>
+            <h5>Tantangan Game</h5>
+            <p>Uji refleks dan logika di Challenge Zone melalui 4 variasi permainan (Tebak Kebijakan, Matching, T/F, Mystery Box).</p>
+          </div>
+          <div class="guide-step-item">
+            <div class="step-num">4</div>
+            <h5>Ujian & Koleksi Badge</h5>
+            <p>Kerjakan 20 soal Final Mission untuk membuktikan skormu dan kumpulkan 10 badge kehormatan di menu Achievement!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Navigation Cards to 4 Main Areas -->
+      <div class="home-features-grid">
+        <div class="feature-nav-card" onclick="navigateTo('explore')">
+          <div class="feature-icon-box icon-blue">📖</div>
+          <h4>Explore Materi</h4>
+          <p>Pelajari definisi, teori keunggulan mutlak & komparatif, instrumen proteksi tarif/kuota, dan dampaknya.</p>
+          <span class="card-action-link">Buka Materi &rarr;</span>
+        </div>
+
+        <div class="feature-nav-card" onclick="navigateTo('tradelab')">
+          <div class="feature-icon-box icon-navy">⚖️</div>
+          <h4>Trade Lab Simulator</h4>
+          <p>Uji keputusan strategismu dalam menghadapi dumping baja, krisis pangan beras, dan serbuan impor tekstil.</p>
+          <span class="card-action-link">Masuk Lab &rarr;</span>
+        </div>
+
+        <div class="feature-nav-card" onclick="navigateTo('challenge')">
+          <div class="feature-icon-box icon-gold">🎮</div>
+          <h4>Challenge Zone</h4>
+          <p>Mainkan 4 game edukasi bertempo dinamis untuk mengasah wawasan ekonomi sambil mengumpulkan XP.</p>
+          <span class="card-action-link">Mulai Bermain &rarr;</span>
+        </div>
+
+        <div class="feature-nav-card" onclick="navigateTo('finalmission')">
+          <div class="feature-icon-box icon-green">🎯</div>
+          <h4>Final Mission</h4>
+          <p>20 soal pilihan ganda evaluasi akhir komprehensif berstandar HOTS dengan pembahasan mendalam.</p>
+          <span class="card-action-link">Mulai Ujian &rarr;</span>
+        </div>
+
+        <div class="feature-nav-card" onclick="navigateTo('profile')">
+          <div class="feature-icon-box" style="background: #fdf2f8; color: #db2777;">👩‍🏫</div>
+          <h4>Profil Guru</h4>
+          <p>Identitas pengembang media: Akfini Gina Afafa (NIM: 2417011083), Universitas Pendidikan Ganesha.</p>
+          <span class="card-action-link">Lihat Profil &rarr;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 2: EXPLORE (3 Modul Materi Pembelajaran Interaktif + Video YouTube)
+         ======================================================================== -->
+    <section id="view-explore" class="page-view">
+      <div class="section-head">
+        <span class="section-tag">Modul Interaktif & Multimedia</span>
+        <h2 class="section-title">Eksplorasi Perdagangan Internasional</h2>
+        <p class="section-desc">Pilih modul di bawah ini untuk mempelajari konsep dasar, video YouTube interaktif, teori perdagangan klasik hingga modern, instrumen proteksi, dan studi kasus Indonesia.</p>
+      </div>
+
+      <!-- Modul Tabs Switcher (3 Modul + 1 Video YouTube Interaktif) -->
+      <div class="module-tabs">
+        <button class="module-tab-btn active" id="tabBtn-mod1" onclick="switchModuleTab('mod1')">
+          <span>Modul 1: Teori & Konsep Lengkap</span>
+          <span id="tabBadge-mod1" class="badge-done" style="display: none;">✓ Selesai</span>
+        </button>
+        <button class="module-tab-btn" id="tabBtn-mod2" onclick="switchModuleTab('mod2')">
+          <span>Modul 2: Jenis Kebijakan Perdagangan</span>
+          <span id="tabBadge-mod2" class="badge-done" style="display: none;">✓ Selesai</span>
+        </button>
+        <button class="module-tab-btn" id="tabBtn-mod3" onclick="switchModuleTab('mod3')">
+          <span>Modul 3: Dampak Kebijakan Perdagangan</span>
+          <span id="tabBadge-mod3" class="badge-done" style="display: none;">✓ Selesai</span>
+        </button>
+        <button class="module-tab-btn" id="tabBtn-video" onclick="switchModuleTab('video')">
+          <span>🎥 Video YouTube & Intisari</span>
+        </button>
+      </div>
+
+      <!-- ================= MODUL 1 ================= -->
+      <div class="module-content-pane active" id="pane-mod1">
+        <div class="module-header">
+          <div class="module-meta">
+            <span class="mod-tag">Modul Pembelajaran 01 • Kelas X SMA</span>
+            <h3>Pengenalan Perdagangan Internasional & Tujuannya</h3>
+          </div>
+          <button class="mark-complete-btn" id="btnComplete-mod1" onclick="completeModule('mod1')">
+            <span>Tandai Selesai</span> (+100 XP)
+          </button>
+        </div>
+
+        <div class="content-block">
+          <h4><span>🌐</span> 1. Hakikat Perdagangan Internasional</h4>
+          <p>
+            Tidak ada satu pun negara di dunia yang mampu memenuhi seluruh kebutuhan penduduknya secara mandiri tanpa berinteraksi dengan bangsa lain. <strong>Perdagangan Internasional</strong> adalah aktivitas perdagangan atau pertukaran barang dan jasa yang dilakukan oleh penduduk suatu negara dengan penduduk negara lain atas dasar kesepakatan bersama yang saling menguntungkan.
+          </p>
+          <p>
+            Aktivitas inti perdagangan internasional terbagi menjadi dua:
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 16px; color: var(--slate-700);">
+            <li><strong>Ekspor (Export):</strong> Kegiatan menjual dan mengeluarkan barang/jasa dari wilayah pabean dalam negeri ke luar negeri. Pelakunya disebut <em>Eksportir</em>. Transaksi ini mendatangkan devisa bagi kas negara.</li>
+            <li><strong>Impor (Import):</strong> Kegiatan membeli dan memasukkan barang/jasa dari luar negeri ke dalam daerah pabean domestik. Pelakunya disebut <em>Importir</em> untuk memenuhi kebutuhan yang belum efisien diproduksi sendiri.</li>
+          </ul>
+        </div>
+
+        <!-- Infografis Konsep Visual SVG -->
+        <div class="infographic-banner">
+          <svg class="infographic-svg" viewBox="0 0 160 120" fill="none">
+            <circle cx="80" cy="60" r="50" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
+            <!-- Flag Indonesia & Mitra -->
+            <rect x="35" y="45" width="30" height="10" fill="#ef4444"/>
+            <rect x="35" y="55" width="30" height="10" fill="#ffffff" stroke="#e2e8f0"/>
+            <rect x="95" y="45" width="30" height="20" fill="#2563eb" rx="2"/>
+            <!-- Panah Bolak Balik Ekspor Impor -->
+            <path d="M45 35 C 65 20, 95 20, 115 35" stroke="#f59e0b" stroke-width="2.5" fill="none"/>
+            <polygon points="115,35 110,27 105,33" fill="#f59e0b"/>
+            <path d="M115 85 C 95 100, 65 100, 45 85" stroke="#10b981" stroke-width="2.5" fill="none"/>
+            <polygon points="45,85 50,93 55,87" fill="#10b981"/>
+          </svg>
+          <div class="infographic-text">
+            <h5>Mekanisme Alur Arus Devisa & Komoditas</h5>
+            <p>Eksportir mengirimkan komoditas unggulan Indonesia ke mitra dagang dunia, sementara negara pembeli mentransfer devisa (valuta asing) sebagai pembayaran yang memperkuat ketahanan moneter nasional.</p>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h4><span>✨</span> 2. Faktor Pendorong & Teori Lengkap Perdagangan Internasional</h4>
+          <p>
+            Mengapa negara-negara saling bertransaksi? Pendorong utamanya mencakup perbedaan kekayaan Sumber Daya Alam (SDA), iklim, variasi biaya produksi, keahlian tenaga kerja, penguasaan IPTEK, dan selera konsumen.
+          </p>
+          <p>
+            Untuk menjelaskan fenomena ini, para pakar ekonomi dunia dari masa ke masa merumuskan <strong>teori-teori perdagangan internasional</strong> (mulai dari era Merkantilisme, Mazhab Klasik, hingga Teori Modern). Berikut adalah 9 teori utama yang wajib Anda kuasai:
+          </p>
+
+          <!-- 9 Theories Matrix Cards -->
+          <div class="theories-matrix-grid">
+            <!-- Teori 1: Merkantilisme -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-pre">Abad 16 - 18</span>
+                <span style="font-size: 1.2rem;">🪙</span>
+              </div>
+              <h5>1. Teori Merkantilisme</h5>
+              <div class="theory-tokoh">Tokoh: Jean Bodin, Thomas Mun, J.B. Colbert</div>
+              <p>Mengukur kekayaan suatu negara dari seberapa banyak timbunan logam mulia (emas & perak) yang dimiliki. Negara harus memaksimalkan ekspor dan membatasi impor sekecil mungkin melalui proteksionisme ketat (*Zero-Sum Game*).</p>
+              <div class="theory-key-point">
+                <strong>Inti Doktrin:</strong> Ekspor &gt; Impor (Surplus) demi menumpuk emas; keuntungan satu negara berarti kerugian negara lain.
+              </div>
+            </div>
+
+            <!-- Teori 2: Keunggulan Mutlak -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-classic">Teori Klasik (1776)</span>
+                <span style="font-size: 1.2rem;">🏛️</span>
+              </div>
+              <h5>2. Keunggulan Mutlak (Absolute Advantage)</h5>
+              <div class="theory-tokoh">Tokoh: Adam Smith (*The Wealth of Nations*)</div>
+              <p>Membantah merkantilisme. Perdagangan saling menguntungkan (*Positive-Sum Game*) jika tiap negara berspesialisasi memproduksi barang yang memiliki efisiensi mutlak lebih tinggi (biaya produksi terendah atau hasil terbanyak).</p>
+              <div class="theory-key-point">
+                <strong>Contoh:</strong> Indonesia unggul mutlak memproduksi timah dibanding Jepang; Jepang unggul mutlak robotik. Keduanya saling bertukar.
+              </div>
+            </div>
+
+            <!-- Teori 3: Keunggulan Komparatif -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-classic">Teori Klasik (1817)</span>
+                <span style="font-size: 1.2rem;">⚖️</span>
+              </div>
+              <h5>3. Keunggulan Komparatif (Comparative Advantage)</h5>
+              <div class="theory-tokoh">Tokoh: David Ricardo</div>
+              <p>Meskipun suatu negara kalah mutlak di semua jenis barang dibanding mitra dagangnya, perdagangan tetap menguntungkan asalkan berspesialisasi pada barang dengan <strong>biaya peluang (*opportunity cost*)</strong> paling kecil.</p>
+              <div class="theory-key-point">
+                <strong>Kunci:</strong> Efisiensi relatif biaya pengorbanan alternatif, bukan sekadar keunggulan fisik absolut.
+              </div>
+            </div>
+
+            <!-- Teori 4: Biaya Alternatif -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-classic">Klasik-Neoklasik (1936)</span>
+                <span style="font-size: 1.2rem;">📈</span>
+              </div>
+              <h5>4. Teori Biaya Alternatif (Opportunity Cost)</h5>
+              <div class="theory-tokoh">Tokoh: Gottfried Haberler</div>
+              <p>Menyempurnakan kelemahan Ricardo yang hanya berpijak pada nilai tenaga kerja (*labor theory of value*). Haberler menggunakan pendekatan Kurva Kemungkinan Produksi (PPF) untuk mengukur pengorbanan unit produk lain.</p>
+              <div class="theory-key-point">
+                <strong>Kunci:</strong> Harga komoditas diukur dari seberapa banyak komoditas kedua yang harus dikorbankan untuk memproduksi komoditas pertama.
+              </div>
+            </div>
+
+            <!-- Teori 5: Proporsi Faktor Heckscher-Ohlin -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-modern">Teori Modern (1919/1933)</span>
+                <span style="font-size: 1.2rem;">👥</span>
+              </div>
+              <h5>5. Proporsi Faktor (Heckscher-Ohlin / H-O)</h5>
+              <div class="theory-tokoh">Tokoh: Eli Heckscher & Bertil Ohlin</div>
+              <p>Perdagangan terjadi karena perbedaan ketersediaan faktor produksi (*factor endowments*). Negara dengan tenaga kerja melimpah akan mengekspor barang padat karya (*labor-intensive*); negara berlimpah modal mengekspor barang padat modal (*capital-intensive*).</p>
+              <div class="theory-key-point">
+                <strong>Contoh Indonesia:</strong> Mengekspor garmen dan alas kaki (padat karya) dan mengimpor mesin pabrik presisi dari Jerman (padat modal).
+              </div>
+            </div>
+
+            <!-- Teori 6: Paradoks Leontief -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-modern">Uji Empiris (1953)</span>
+                <span style="font-size: 1.2rem;">🔍</span>
+              </div>
+              <h5>6. Teori Paradoks Leontief</h5>
+              <div class="theory-tokoh">Tokoh: Wassily Leontief (Peraih Nobel Ekonomi)</div>
+              <p>Hasil penelitian empiris pada data ekonomi AS yang mengejutkan: AS sebagai negara paling kaya modal (*capital-rich*) ternyata komposisi ekspornya justru lebih padat karya dibanding barang impornya, mematahkan asumsi murni H-O.</p>
+              <div class="theory-key-point">
+                <strong>Penjelasan:</strong> Tenaga kerja AS memiliki keterampilan dan produktivitas sangat tinggi (*human capital*) dibanding tenaga kerja negara lain.
+              </div>
+            </div>
+
+            <!-- Teori 7: Siklus Hidup Produk -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-modern">Teori Modern (1966)</span>
+                <span style="font-size: 1.2rem;">🔄</span>
+              </div>
+              <h5>7. Siklus Hidup Produk (Product Life Cycle)</h5>
+              <div class="theory-tokoh">Tokoh: Raymond Vernon</div>
+              <p>Pola ekspor-impor komoditas bergeser seiring daur hidup produk melalui 3 tahap: (1) Tahap Inovasi Produk Baru di negara maju, (2) Tahap Pematangan (ekspor ke negara lain), dan (3) Tahap Standardisasi (manufaktur berpindah ke negara berkembang berupah rendah).</p>
+              <div class="theory-key-point">
+                <strong>Contoh:</strong> Ponsel pintar dirancang di Silicon Valley AS, namun perakitan massal dipindahkan ke negara berkembang Asia.
+              </div>
+            </div>
+
+            <!-- Teori 8: Skala Ekonomi & New Trade Theory -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-modern">Teori Modern (1979)</span>
+                <span style="font-size: 1.2rem;">🏭</span>
+              </div>
+              <h5>8. Skala Ekonomi & New Trade Theory</h5>
+              <div class="theory-tokoh">Tokoh: Paul Krugman (Peraih Nobel Ekonomi 2008)</div>
+              <p>Perdagangan terjadi bukan hanya karena perbedaan komparatif, melainkan karena *economies of scale* (skala ekonomis produksi massal) dan keinginan konsumen menikmati keragaman variasi produk (*intra-industry trade* antarnegara maju).</p>
+              <div class="theory-key-point">
+                <strong>Contoh:</strong> Jerman mengekspor mobil BMW ke Jepang, sementara Jepang mengekspor mobil Toyota ke Jerman secara silang.
+              </div>
+            </div>
+
+            <!-- Teori 9: Keunggulan Kompetitif Diamond Model -->
+            <div class="theory-card-item">
+              <div class="theory-top-meta">
+                <span class="theory-era-badge era-modern">Teori Modern (1990)</span>
+                <span style="font-size: 1.2rem;">💎</span>
+              </div>
+              <h5>9. Keunggulan Kompetitif (Diamond Model)</h5>
+              <div class="theory-tokoh">Tokoh: Michael E. Porter (Harvard Business School)</div>
+              <p>Daya saing ekspor suatu bangsa ditentukan oleh interaksi 4 pilar berlian (*Diamond Model*): (1) Kondisi Faktor, (2) Kondisi Permintaan Domestik, (3) Industri Pendukung Terkait, serta (4) Strategi, Struktur, dan Persaingan Perusahaan.</p>
+              <div class="theory-key-point">
+                <strong>Aplikasi:</strong> Daya saing ekspor tidak statis berdasarkan warisan alam, melainkan diciptakan (*created advantage*) melalui inovasi dan klaster industri.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contoh Kasus Nyata Indonesia -->
+        <div class="case-study-box">
+          <span class="case-badge">Kasus Nyata Indonesia</span>
+          <h5>Mengapa Indonesia Mengekspor Sawit dan Mengimpor Gandum?</h5>
+          <p>
+            Indonesia merupakan produsen minyak kelapa sawit (CPO) nomor satu di dunia karena memiliki iklim tropis khatulistiwa yang ideal. Sebaliknya, tanaman gandum memerlukan iklim subtropis empat musim untuk tumbuh optimal. Berdasarkan prinsip keunggulan komparatif, lebih efisien bagi Indonesia untuk mengekspor sawit ke luar negeri dan menggunakan devisa yang diperoleh untuk mengimpor gandum sebagai bahan baku roti dan mi instan.
+          </p>
+        </div>
+
+        <!-- Summary Box -->
+        <div class="summary-box">
+          <h5><span>📝</span> Ringkasan Modul 1</h5>
+          <ul class="summary-list">
+            <li>Perdagangan internasional adalah pertukaran komoditas dan jasa melintasi perbatasan negara yang terdiri atas ekspor dan impor.</li>
+            <li>Faktor pendorong mencakup keragaman SDA, penguasaan teknologi, selera masyarakat, dan efisiensi biaya produksi.</li>
+            <li>Keunggulan komparatif David Ricardo menekankan bahwa spesialisasi pada biaya peluang terendah memberikan keuntungan bagi seluruh negara yang bertransaksi (*gains from trade*).</li>
+            <li>Tujuan kebijakan perdagangan adalah menjaga stabilitas neraca perdagangan, melindungi industri strategis, dan memupuk cadangan devisa.</li>
+          </ul>
+        </div>
+
+        <!-- Mini Quiz Modul 1 -->
+        <div class="mini-quiz-box">
+          <div class="mini-quiz-header">
+            <h5><span>⚡</span> Mini Kuis Modul 1</h5>
+            <span style="font-size: 0.8rem; color: var(--gold-accent);">+30 XP</span>
+          </div>
+          <p class="mini-quiz-prompt">
+            Mengapa negara Indonesia tetap melakukan impor gandum dari luar negeri meskipun Indonesia adalah negara agraris yang sangat subur?
+          </p>
+          <div class="mini-quiz-options">
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod1', 0, this)">
+              <span>A. Karena selera masyarakat Indonesia hanya menyukai produk luar negeri</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod1', 1, this)">
+              <span>B. Karena iklim tropis Indonesia tidak cocok secara komparatif untuk budidaya gandum massal</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod1', 2, this)">
+              <span>C. Karena biaya impor gandum selalu lebih mahal dari beras lokal</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod1', 3, this)">
+              <span>D. Karena peraturan internasional mewajibkan setiap negara mengimpor gandum</span>
+              <span>○</span>
+            </button>
+          </div>
+          <div id="feedback-q_mod1" class="mini-quiz-feedback"></div>
+        </div>
+      </div>
+
+      <!-- ================= MODUL 2 ================= -->
+      <div class="module-content-pane" id="pane-mod2">
+        <div class="module-header">
+          <div class="module-meta">
+            <span class="mod-tag">Modul Pembelajaran 02 • Kelas X SMA</span>
+            <h3>Ragam Instrumen & Jenis Kebijakan Perdagangan</h3>
+          </div>
+          <button class="mark-complete-btn" id="btnComplete-mod2" onclick="completeModule('mod2')">
+            <span>Tandai Selesai</span> (+100 XP)
+          </button>
+        </div>
+
+        <div class="content-block">
+          <h4><span>🛡️</span> 1. Perdagangan Bebas vs Proteksionisme</h4>
+          <p>
+            Dalam pergaulan ekonomi dunia, terdapat dua kutub pendekatan kebijakan perdagangan:
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 16px; color: var(--slate-700);">
+            <li><strong>Perdagangan Bebas (Free Trade):</strong> Kebijakan yang menghendaki hilangnya hambatan tarif maupun regulasi kuota. Tujuannya memaksimalkan efisiensi persaingan global, transfer teknologi, dan menurunkan harga barang bagi konsumen.</li>
+            <li><strong>Proteksionisme:</strong> Kebijakan pemerintah yang secara sengaja membatasi atau mengendalikan impor guna melindungi industri dalam negeri (*infant industry*), menjaga lapangan kerja lokal, dan mengamankan neraca pembayaran.</li>
+          </ul>
+        </div>
+
+        <div class="content-block">
+          <h4><span>📋</span> 2. Ragam Instrumen Kebijakan Perdagangan Internasional</h4>
+          <p>Berikut adalah 8 instrumen kebijakan perdagangan yang paling sering diterapkan oleh negara-negara di dunia:</p>
+          
+          <div class="policy-cards-grid">
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-blue">Instrumen 1</span>
+              <h5>Tarif / Bea Masuk</h5>
+              <p>Pajak pembebanan atas barang impor saat melintasi kepabeanan. Menjadikan harga barang impor lebih mahal sehingga produk lokal tetap dapat bersaing.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-red">Instrumen 2</span>
+              <h5>Kuota Impor</h5>
+              <p>Pembatasan kuantitas fisik maksimum (volume/tonase) komoditas asing yang boleh diimpor selama masa tertentu untuk mencegah membanjirnya produk asing.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-green">Instrumen 3</span>
+              <h5>Subsidi Ekspor</h5>
+              <p>Bantuan finansial, insentif pajak, atau potongan bunga perbankan dari pemerintah kepada produsen lokal agar harga barang ekspornya lebih murah di pasar dunia.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-red">Instrumen 4</span>
+              <h5>Larangan Impor & Ekspor</h5>
+              <p>Regulasi mutlak yang melarang masuk atau keluarnya barang tertentu demi alasan keamanan, kedaulatan, moral, kesehatan, atau perlindungan SDA mentah.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-amber">Instrumen 5</span>
+              <h5>Politik Dumping</h5>
+              <p>Strategi diskriminasi harga di mana produsen menjual produk di pasar internasional dengan harga lebih rendah dibanding harga pasar dalam negerinya.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-blue">Instrumen 6</span>
+              <h5>Bea Masuk Anti-Dumping (BMAD)</h5>
+              <p>Pungutan tambahan resmi yang sah di bawah regulasi WTO untuk memulihkan kerugian industri lokal yang diserang produk impor berharga dumping.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-green">Instrumen 7</span>
+              <h5>Premi & Insentif Ekspor</h5>
+              <p>Bonus penghargaan atau hadiah khusus dari pemerintah kepada pelaku usaha yang berhasil meningkatkan volume ekspor dan mutu produk nasional.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-amber">Instrumen 8</span>
+              <h5>Diskriminasi Harga</h5>
+              <p>Penetapan harga yang berbeda untuk satu jenis barang yang sama terhadap negara pembeli yang berlainan sesuai perjanjian bilateral.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kasus Nyata Indonesia -->
+        <div class="case-study-box">
+          <span class="case-badge">Kasus Nyata Indonesia</span>
+          <h5>Kebijakan Larangan Ekspor Bijih Nikel Mentah & Program Hilirisasi</h5>
+          <p>
+            Mulai tahun 2020, Pemerintah Republik Indonesia memberlakukan kebijakan berani dengan <strong>melarang total ekspor bijih nikel mentah (*raw nickel ore*)</strong>. Kebijakan ini mewajibkan perusahaan tambang membangun pabrik peleburan (*smelter*) di dalam negeri. Hasilnya, Indonesia tidak lagi hanya mengekspor tanah tambang murah, melainkan feronikel, baja nirkarat, dan bahan baku baterai kendaraan listrik dengan nilai tambah melonjak lebih dari 10 kali lipat serta membuka ratusan ribu lapangan kerja baru.
+          </p>
+        </div>
+
+        <!-- Summary Box -->
+        <div class="summary-box">
+          <h5><span>📝</span> Ringkasan Modul 2</h5>
+          <ul class="summary-list">
+            <li>Kebijakan perdagangan internasional dirancang antara tujuan membuka pasar (perdagangan bebas) atau memproteksi industri lokal.</li>
+            <li>Tarif bea masuk dan kuota impor mengendalikan pasokan barang luar negeri di pasar domestik.</li>
+            <li>Dumping merupakan praktik persaingan dagang tidak sehat yang dapat dilawan menggunakan instrumen sah Bea Masuk Anti-Dumping (BMAD).</li>
+            <li>Larangan ekspor bijih tambang merupakan contoh kebijakan proteksionisme berorientasi hilirisasi industri bernilai tambah.</li>
+          </ul>
+        </div>
+
+        <!-- Mini Quiz Modul 2 -->
+        <div class="mini-quiz-box">
+          <div class="mini-quiz-header">
+            <h5><span>⚡</span> Mini Kuis Modul 2</h5>
+            <span style="font-size: 0.8rem; color: var(--gold-accent);">+30 XP</span>
+          </div>
+          <p class="mini-quiz-prompt">
+            Strategi pemerintah Indonesia yang melarang ekspor bijih nikel mentah ke luar negeri dan mewajibkan pembangunan smelter di dalam negeri merupakan contoh dari...
+          </p>
+          <div class="mini-quiz-options">
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod2', 0, this)">
+              <span>A. Praktik politik dumping internasional</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod2', 1, this)">
+              <span>B. Kebijakan larangan ekspor untuk hilirisasi industri bernilai tambah tinggi</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod2', 2, this)">
+              <span>C. Kebijakan kuota impor bebas tanpa pengawasan</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod2', 3, this)">
+              <span>D. Kebijakan subsidi ekspor barang mentah</span>
+              <span>○</span>
+            </button>
+          </div>
+          <div id="feedback-q_mod2" class="mini-quiz-feedback"></div>
+        </div>
+      </div>
+
+      <!-- ================= MODUL 3 ================= -->
+      <div class="module-content-pane" id="pane-mod3">
+        <div class="module-header">
+          <div class="module-meta">
+            <span class="mod-tag">Modul Pembelajaran 03 • Kelas X SMA</span>
+            <h3>Analisis Dampak Positif & Negatif Kebijakan Perdagangan</h3>
+          </div>
+          <button class="mark-complete-btn" id="btnComplete-mod3" onclick="completeModule('mod3')">
+            <span>Tandai Selesai</span> (+100 XP)
+          </button>
+        </div>
+
+        <div class="content-block">
+          <h4><span>⚖️</span> 1. Dua Sisi Mata Uang Kebijakan Perdagangan</h4>
+          <p>
+            Setiap instrumen kebijakan perdagangan internasional selalu memiliki efek timbal balik (*trade-off*). Keputusan yang menguntungkan salah satu pihak sering kali memberikan beban bagi pihak lainnya. Seorang pembuat kebijakan harus cermat menimbang kepentingan produsen, konsumen, dan kas negara.
+          </p>
+        </div>
+
+        <!-- Matriks Dampak Terhadap 5 Entitas -->
+        <div class="content-block">
+          <h4><span>📊</span> 2. Dampak Kebijakan Proteksi (Tarif & Kuota)</h4>
+          <div class="policy-cards-grid">
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-green">Pihak 1: Produsen Lokal</span>
+              <h5>Dampak Positif & Negatif</h5>
+              <p><strong>Positif:</strong> Terhindar dari persaingan produk impor murah, omzet terjaga, dapat menyerap tenaga kerja lokal.<br>
+              <strong>Negatif:</strong> Bila proteksi berlarut-larut, produsen cenderung malas berinovasi dan tidak efisien.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-red">Pihak 2: Konsumen</span>
+              <h5>Dampak Positif & Negatif</h5>
+              <p><strong>Positif:</strong> Kepastian standar kualitas barang domestik yang terawasi.<br>
+              <strong>Negatif:</strong> Harus membayar harga barang lebih mahal, serta pilihan variasi produk di pasar menjadi lebih sedikit.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-blue">Pihak 3: Pemerintah</span>
+              <h5>Dampak Positif & Negatif</h5>
+              <p><strong>Positif:</strong> Memperoleh pendapatan negara dari pos Bea Masuk dan Cukai serta menjaga stabilitas kurs rupiah.<br>
+              <strong>Negatif:</strong> Berisiko mendapat gugatan sengketa dagang dari negara mitra dagang di forum WTO.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-amber">Pihak 4: Kinerja Ekspor</span>
+              <h5>Dampak Positif & Negatif</h5>
+              <p><strong>Positif:</strong> Subsidi ekspor memacu penetrasi komoditas Indonesia di pasar global dan mendongkrak devisa.<br>
+              <strong>Negatif:</strong> Berpotensi memicu perang dagang balasan (*retaliasi*) dari negara pengimpor.</p>
+            </div>
+
+            <div class="policy-mini-card">
+              <span class="pol-badge badge-blue">Pihak 5: Arus Impor</span>
+              <h5>Dampak Positif & Negatif</h5>
+              <p><strong>Positif:</strong> Impor barang modal (mesin teknologi tinggi) mempercepat industrialisasi domestik.<br>
+              <strong>Negatif:</strong> Impor barang konsumsi berlebihan menguras devisa dan mengancam industri dalam negeri.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kasus Nyata Indonesia -->
+        <div class="case-study-box">
+          <span class="case-badge">Kasus Nyata Indonesia</span>
+          <h5>Dilema Kebijakan Tarif & Kuota Impor Beras</h5>
+          <p>
+            Ketika panen raya tiba, petani lokal membutuhkan harga jual gabah yang menguntungkan agar tidak merugi. Pemerintah memberlakukan pembatasan atau tarif impor beras untuk menjaga harga panen petani lokal. Namun di sisi lain, jika produksi dalam negeri sedang anjlok akibat kekeringan kemarau panjang, pembatasan impor yang terlalu kaku justru menyebabkan harga beras di warung-warung meroket, memberatkan jutaan keluarga konsumen. Pemerintah harus mencari titik temu keseimbangan antara perlindungan petani dan keterjangkauan daya beli rakyat luas.
+          </p>
+        </div>
+
+        <!-- Summary Box -->
+        <div class="summary-box">
+          <h5><span>📝</span> Ringkasan Modul 3</h5>
+          <ul class="summary-list">
+            <li>Kebijakan proteksi melindungi produsen lokal namun berisiko membebani konsumen dengan harga yang lebih tinggi.</li>
+            <li>Tarif impor menghasilkan penerimaan fiskal bagi pemerintah, sementara kuota impor mengunci jumlah ketersediaan fisik.</li>
+            <li>Subsidi ekspor memacu daya saing komoditas global namun menyedot alokasi anggaran belanja APBN.</li>
+            <li>Kunci keberhasilan diplomasi perdagangan internasional adalah tercapainya neraca dagang yang sehat tanpa memicu inflasi di tingkat masyarakat.</li>
+          </ul>
+        </div>
+
+        <!-- Mini Quiz Modul 3 -->
+        <div class="mini-quiz-box">
+          <div class="mini-quiz-header">
+            <h5><span>⚡</span> Mini Kuis Modul 3</h5>
+            <span style="font-size: 0.8rem; color: var(--gold-accent);">+30 XP</span>
+          </div>
+          <p class="mini-quiz-prompt">
+            Siapakah pihak yang paling diuntungkan ketika pemerintah menetapkan tarif bea masuk yang tinggi atas produk pakaian jadi (tekstil) impor?
+          </p>
+          <div class="mini-quiz-options">
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod3', 0, this)">
+              <span>A. Produsen tekstil dan UMKM konveksi di dalam negeri</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod3', 1, this)">
+              <span>B. Konsumen yang mencari pakaian impor berharga paling murah</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod3', 2, this)">
+              <span>C. Pabrik garmen luar negeri dari negara eksportir</span>
+              <span>○</span>
+            </button>
+            <button class="mini-opt-btn" onclick="answerMiniQuiz('q_mod3', 3, this)">
+              <span>D. Perusahaan jasa logistik kargo luar negeri</span>
+              <span>○</span>
+            </button>
+          </div>
+          <div id="feedback-q_mod3" class="mini-quiz-feedback"></div>
+        </div>
+      </div>
+
+      <!-- ================= PANE VIDEO: YOUTUBE & INTISARI ================= -->
+      <div class="module-content-pane" id="pane-video">
+        <div class="module-header">
+          <div class="module-meta">
+            <span class="mod-tag">Multimedia Edukasi • Perdagangan Internasional</span>
+            <h3>Video Pembelajaran YouTube & Ringkasan Komprehensif</h3>
+          </div>
+          <span class="video-badge-pill">
+            <span>🔴</span> YouTube Terverifikasi
+          </span>
+        </div>
+
+        <!-- Video Box -->
+        <div class="video-section-box">
+          <div class="video-header-row">
+            <div>
+              <h4 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">
+                Materi Lengkap: Konsep & Dinamika Perdagangan Internasional
+              </h4>
+              <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">
+                Tonton video penjelasan interaktif berikut untuk memperkuat pemahaman konsep dasar, manfaat, faktor pendorong, dan kebijakan perdagangan.
+              </p>
+            </div>
+          </div>
+
+          <!-- YouTube Embed Responsive Frame -->
+          <div class="video-iframe-wrap">
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/Y5CATMbHApU?si=aq5EIoRuVzdD2vsn" 
+              title="Materi Perdagangan Internasional Ekonomi SMA" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- Poin-Poin Intisari yang Dibahas dalam Video -->
+          <h5 style="font-size: 1.05rem; font-weight: 800; color: var(--gold-accent); margin: 24px 0 12px; display: flex; align-items: center; gap: 8px;">
+            <span>📌</span> Poin-Poin Intisari yang Dibahas dalam Video
+          </h5>
+          <div class="video-summary-grid">
+            <div class="video-point-item">
+              <h6><span>1.</span> Pengertian Dasar</h6>
+              <p>Perdagangan internasional sebagai transaksi lintas batas wilayah kepabeanan negara yang mencakup kegiatan ekspor (menjual ke luar negeri) dan impor (membeli dari luar negeri).</p>
+            </div>
+
+            <div class="video-point-item">
+              <h6><span>2.</span> Manfaat Nyata</h6>
+              <p>Memperoleh devisa negara, memperluas pasar bagi produk domestik, mentransfer teknologi modern, serta memenuhi komoditas yang tidak dapat diproduksi di dalam negeri.</p>
+            </div>
+
+            <div class="video-point-item">
+              <h6><span>3.</span> Faktor Pendorong Utama</h6>
+              <p>Perbedaan Sumber Daya Alam (SDA), perbedaan iklim/geografi, penguasaan IPTEK, efisiensi biaya produksi (*economies of scale*), serta keragaman selera masyarakat.</p>
+            </div>
+
+            <div class="video-point-item">
+              <h6><span>4.</span> Kebijakan Proteksi</h6>
+              <p>Penerapan instrumen regulasi seperti tarif bea masuk, kuota impor, subsidi ekspor, dan pencegahan dumping untuk melindungi industri serta tenaga kerja lokal.</p>
+            </div>
+          </div>
+
+          <!-- Catatan Pengayaan Teori yang Melengkapi Video -->
+          <div style="margin-top: 24px; background: rgba(37, 99, 235, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 18px;">
+            <h6 style="font-size: 0.95rem; font-weight: 800; color: #38bdf8; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>💡</span> Pengayaan Materi: Teori-Teori yang Melengkapi Video Ini
+            </h6>
+            <p style="font-size: 0.85rem; color: #e2e8f0; line-height: 1.6; margin: 0;">
+              Video di atas memberikan pemahaman fondasi yang sangat baik. Untuk melengkapi materi kurikulum secara tuntas, website <strong>TRADE QUEST</strong> ini telah menyajikan <strong>teori-teori lanjutan yang belum tercakup di video</strong> pada <em>Modul 1</em>, seperti: <strong>Teori Proporsi Faktor Produksi (Heckscher-Ohlin)</strong>, <strong>Paradoks Leontief</strong>, <strong>Teori Siklus Hidup Produk (Raymond Vernon)</strong>, <strong>Teori Skala Ekonomi (Paul Krugman)</strong>, dan <strong>Diamond Model Keunggulan Kompetitif (Michael Porter)</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 3: TRADE LAB (Simulasi Kebijakan: Menteri Perdagangan Indonesia)
+         ======================================================================== -->
+    <section id="view-tradelab" class="page-view">
+      <div class="section-head">
+        <span class="section-tag">Simulasi Kepemimpinan</span>
+        <h2 class="section-title">Trade Lab: Ruang Menteri Perdagangan</h2>
+        <p class="section-desc">Anda ditunjuk sebagai Menteri Perdagangan Republik Indonesia. Hadapi 4 krisis perdagangan nyata, tentukan kebijakan terbaik, dan amati langsung kalkulasi dampaknya!</p>
+      </div>
+
+      <!-- Minister Desk Panel -->
+      <div class="minister-desk-card">
+        <!-- SVG Watermark Insignia -->
+        <svg class="desk-seal-watermark" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="45" stroke="#f59e0b" stroke-width="2"/>
+          <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2 3"/>
+          <path d="M50 20 L58 38 L78 38 L62 50 L68 68 L50 56 L32 68 L38 50 L22 38 L42 38 Z" fill="#f59e0b"/>
+        </svg>
+
+        <div class="minister-badge-row">
+          <div class="minister-title">
+            <span style="font-size: 2rem;">🏛️</span>
+            <div>
+              <h3>KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA</h3>
+              <span>Ruang Pengambilan Keputusan Strategis Kebijakan Perdagangan Luar Negeri</span>
+            </div>
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid var(--gold-primary); color: var(--gold-accent); padding: 4px 14px; border-radius: 9999px; font-size: 0.8rem; font-weight: 800;">
+            Mandat Menteri Aktif
+          </div>
+        </div>
+
+        <!-- Scenario Selector Pills -->
+        <div class="scenario-selector-grid">
+          <div class="scenario-pill-btn active" id="pill-scen1" onclick="selectLabScenario('scen1')">
+            <div class="scenario-icon">👔</div>
+            <div>
+              <h6>Skenario 1</h6>
+              <p>Produk Lokal Terdesak Impor</p>
+            </div>
+          </div>
+
+          <div class="scenario-pill-btn" id="pill-scen2" onclick="selectLabScenario('scen2')">
+            <div class="scenario-icon">🌾</div>
+            <div>
+              <h6>Skenario 2</h6>
+              <p>Kebutuhan Pokok Melonjak</p>
+            </div>
+          </div>
+
+          <div class="scenario-pill-btn" id="pill-scen3" onclick="selectLabScenario('scen3')">
+            <div class="scenario-icon">🪵</div>
+            <div>
+              <h6>Skenario 3</h6>
+              <p>Produk Ekspor Sulit Bersaing</p>
+            </div>
+          </div>
+
+          <div class="scenario-pill-btn" id="pill-scen4" onclick="selectLabScenario('scen4')">
+            <div class="scenario-icon">🏗️</div>
+            <div>
+              <h6>Skenario 4</h6>
+              <p>Dugaan Dumping Barang Impor</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Briefing Box -->
+        <div class="scenario-briefing">
+          <span class="briefing-tag" id="labBriefingTag">Kasus Tekstil & Pakaian Jadi</span>
+          <h4 class="briefing-title" id="labBriefingTitle">Skenario 1: Produk Lokal Terdesak Impor Murah</h4>
+          <p class="briefing-desc" id="labBriefingDesc">
+            Pasar domestik dibanjiri pakaian jadi impor dengan harga sangat murah dari negara tetangga. Ribuan pelaku UMKM konveksi lokal di Bandung dan Solo mengalami penurunan penjualan drastis hingga terancam gulung tikar. Apa langkah Anda sebagai Menteri Perdagangan?
+          </p>
+        </div>
+
+        <!-- Policy Decision Options -->
+        <div class="policy-options-section">
+          <h4><span>🗳️</span> Pilih Tindakan Kebijakan Anda:</h4>
+          <div class="policy-decision-list" id="labPolicyChoices">
+            <!-- Dynamically injected via JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulation Report Card (Impact Meters & Consequences) -->
+      <div class="simulation-report-card" id="labReportCard">
+        <div class="report-header">
+          <div>
+            <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--slate-500);">Laporan Evaluasi Dampak Kebijakan</span>
+            <h4>Hasil Simulasi Keputusan Menteri</h4>
+          </div>
+          <span class="status-indicator status-optimal" id="labStatusIndicator">Kebijakan Proteksi Terukur</span>
+        </div>
+
+        <!-- 4 Impact Meters -->
+        <div class="impact-meters-grid">
+          <div class="impact-card">
+            <div class="impact-title-row">
+              <span>🏭 Produsen Lokal</span>
+              <span class="impact-score" id="valProdusen">85/100</span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill fill-emerald" id="meterProdusen" style="width: 85%;"></div>
+            </div>
+            <p class="impact-desc-text">Kelangsungan usaha, proteksi tenaga kerja lokal, dan margin laba pabrik.</p>
+          </div>
+
+          <div class="impact-card">
+            <div class="impact-title-row">
+              <span>🛒 Konsumen & Harga</span>
+              <span class="impact-score" id="valKonsumen">60/100</span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill fill-amber" id="meterKonsumen" style="width: 60%;"></div>
+            </div>
+            <p class="impact-desc-text">Keterjangkauan harga barang di pasar dan daya beli rumah tangga.</p>
+          </div>
+
+          <div class="impact-card">
+            <div class="impact-title-row">
+              <span>📦 Ketersediaan Pasokan</span>
+              <span class="impact-score" id="valKetersediaan">80/100</span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill fill-emerald" id="meterKetersediaan" style="width: 80%;"></div>
+            </div>
+            <p class="impact-desc-text">Kecukupan kuantitas barang di pasaran tanpa risiko kelangkaan.</p>
+          </div>
+
+          <div class="impact-card">
+            <div class="impact-title-row">
+              <span>💰 Devisa & Kas Negara</span>
+              <span class="impact-score" id="valDevisa">88/100</span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill fill-emerald" id="meterDevisa" style="width: 88%;"></div>
+            </div>
+            <p class="impact-desc-text">Penerimaan bea masuk dan ketahanan neraca pembayaran negara.</p>
+          </div>
+        </div>
+
+        <!-- Consequence Explanation Box -->
+        <div class="consequence-box">
+          <h5><span>📋</span> Catatan Analisis Ekonomi:</h5>
+          <p id="labConsequenceText">
+            Produsen tekstil lokal terlindungi karena harga produk impor naik. Kas negara mendapat tambahan penerimaan bea masuk. Konsumen mengalami sedikit kenaikan harga pakaian impor, namun stabilitas pasar terjaga secara sehat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 4: CHALLENGE ZONE (4 Permainan Edukasi yang Benar-benar Bisa Dimainkan)
+         ======================================================================== -->
+    <section id="view-challenge" class="page-view">
+      <div class="section-head">
+        <span class="section-tag">Arena Permainan</span>
+        <h2 class="section-title">Challenge Zone: Uji Kecakapan</h2>
+        <p class="section-desc">Pilih dan mainkan 4 jenis permainan edukatif untuk membuktikan pemahaman materimu. Dapatkan skor tinggi dan kumpulkan reward XP!</p>
+      </div>
+
+      <!-- Game Switcher Tabs -->
+      <div class="game-switch-tabs">
+        <button class="game-tab-btn active" id="tabGame-tebak" onclick="switchChallengeGame('tebak')">
+          <span>🎯</span> Game 1: Tebak Kebijakan
+        </button>
+        <button class="game-tab-btn" id="tabGame-matching" onclick="switchChallengeGame('matching')">
+          <span>🧩</span> Game 2: Trade Matching
+        </button>
+        <button class="game-tab-btn" id="tabGame-tf" onclick="switchChallengeGame('tf')">
+          <span>⚖️</span> Game 3: True or False
+        </button>
+        <button class="game-tab-btn" id="tabGame-mystery" onclick="switchChallengeGame('mystery')">
+          <span>🎁</span> Game 4: Mystery Box
+        </button>
+      </div>
+
+      <!-- ----------------------------------------------------------------------
+           GAME 1: Tebak Kebijakan (15 Soal Kasus Nyata)
+           ---------------------------------------------------------------------- -->
+      <div class="game-stage-card active-game" id="stage-tebak">
+        <div class="game-top-bar">
+          <div>
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-dark);">Game 1: Tebak Kebijakan Dagang</h4>
+            <span style="font-size: 0.8rem; color: var(--slate-500);">10 Studi Kasus Kebijakan Perdagangan Internasional</span>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="game-score-badge" id="g1Tracker">Soal 1 / 10</span>
+            <span class="game-score-badge"><strong id="g1ScoreDisplay">Skor: 0</strong></span>
+          </div>
+        </div>
+
+        <!-- Gameplay View -->
+        <div id="g1GameplayView">
+          <div class="g1-question-box">
+            <div class="g1-meta-tag" id="g1Tag">Studi Kasus 1</div>
+            <div class="g1-question-text" id="g1QuestionText">Loading soal...</div>
+          </div>
+
+          <div class="g1-options-grid" id="g1OptionsContainer">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="g1-feedback-box" id="g1FeedbackBox"></div>
+
+          <div style="text-align: right; margin-top: 16px;">
+            <button class="btn btn-blue" id="g1NextBtn" onclick="nextGame1Question()" style="display: none;">
+              Soal Selanjutnya &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Card -->
+        <div id="g1ResultCard" style="display: none; text-align: center; padding: 24px 0;">
+          <div style="font-size: 3rem; margin-bottom: 12px;">🏆</div>
+          <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--navy-dark);">Permainan Selesai!</h4>
+          <p id="g1FinalDetail" style="font-size: 0.95rem; color: var(--slate-600); margin: 8px 0 18px;">Kamu berhasil menyelesaikan seluruh skenario.</p>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--blue-primary); margin-bottom: 24px;" id="g1FinalScore">100 / 100</div>
+          <button class="btn btn-gold" onclick="resetGame1()">
+            <span>🔄</span> Main Lagi
+          </button>
+        </div>
+      </div>
+
+      <!-- ----------------------------------------------------------------------
+           GAME 2: Trade Matching (Mencocokkan 6 Istilah & Definisi)
+           ---------------------------------------------------------------------- -->
+      <div class="game-stage-card" id="stage-matching">
+        <div class="game-top-bar">
+          <div>
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-dark);">Game 2: Trade Matching</h4>
+            <p style="font-size: 0.8rem; color: var(--slate-500); margin-top: 2px;">
+              Klik satu kartu di <strong>Kolom Istilah</strong>, lalu klik kartu yang cocok di <strong>Kolom Definisi</strong>!
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="game-score-badge">Tercocokkan: <strong id="matchCounter">0 / 6</strong></span>
+            <button class="btn btn-outline-navy" style="padding: 6px 14px; font-size: 0.8rem;" onclick="initTradeMatchingGame()" title="Acak Ulang">
+              <span>🔄</span> Acak
+            </button>
+          </div>
+        </div>
+
+        <!-- Matching Board Columns -->
+        <div class="matching-board">
+          <div class="matching-col">
+            <h5>Kolom A: Istilah Perdagangan</h5>
+            <div id="matchTermsCol">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+          <div class="matching-col">
+            <h5>Kolom B: Makna / Definisi</h5>
+            <div id="matchDefsCol">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Victory Banner -->
+        <div id="matchVictoryNotice" style="display: none; background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 14px; padding: 20px; text-align: center; margin-top: 20px;">
+          <div style="font-size: 2.5rem; margin-bottom: 8px;">🎉</div>
+          <h5 style="font-size: 1.25rem; font-weight: 800; color: #065f46;">Luar Biasa! Semua Istilah Berhasil Dicocokkan!</h5>
+          <p style="font-size: 0.88rem; color: #047857; margin: 4px 0 16px;">Pemahaman konsep ekonomi internasionalmu sangat tajam.</p>
+          <button class="btn btn-gold" onclick="initTradeMatchingGame()">
+            <span>🔄</span> Mainkan Lagi
+          </button>
+        </div>
+      </div>
+
+      <!-- ----------------------------------------------------------------------
+           GAME 3: True or False (15 Pernyataan Cepat)
+           ---------------------------------------------------------------------- -->
+      <div class="game-stage-card" id="stage-tf">
+        <div class="game-top-bar">
+          <div>
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-dark);">Game 3: True or False (Benar atau Salah)</h4>
+            <span style="font-size: 0.8rem; color: var(--slate-500);">Tentukan apakah setiap pernyataan ekonomi berikut BENAR atau SALAH!</span>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="game-score-badge" id="tfTracker">Pernyataan 1 / 10</span>
+            <span class="game-score-badge"><strong id="tfScoreDisplay">Skor: 0</strong></span>
+          </div>
+        </div>
+
+        <div id="tfPlayView">
+          <div class="tf-card">
+            <div class="tf-statement" id="tfStatementText">"Ekspor menghasilkan devisa bagi negara pengekspor."</div>
+            
+            <div class="tf-buttons-row" id="tfButtonRow">
+              <button class="btn-tf btn-tf-true" onclick="answerTF(true)">
+                <span>✓</span> BENAR
+              </button>
+              <button class="btn-tf btn-tf-false" onclick="answerTF(false)">
+                <span>✗</span> SALAH
+              </button>
+            </div>
+
+            <div class="tf-feedback" id="tfFeedbackBox"></div>
+          </div>
+
+          <div style="text-align: right; margin-top: 14px;">
+            <button class="btn btn-blue" id="tfNextBtn" onclick="nextTF()" style="display: none;">
+              Lanjut &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Card -->
+        <div id="tfResultCard" style="display: none; text-align: center; padding: 24px 0;">
+          <div style="font-size: 3rem; margin-bottom: 10px;">🌟</div>
+          <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--navy-dark);">Tantangan Benar/Salah Selesai!</h4>
+          <p id="tfFinalDetail" style="font-size: 0.95rem; color: var(--slate-600); margin: 8px 0 18px;">Kamu telah menyelesaikan seluruh pernyataan.</p>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--blue-primary); margin-bottom: 24px;" id="tfFinalScore">100 / 100</div>
+          <button class="btn btn-gold" onclick="resetTF()">
+            <span>🔄</span> Ulangi Tantangan
+          </button>
+        </div>
+      </div>
+
+      <!-- ----------------------------------------------------------------------
+           GAME 4: Mystery Box (8 Kotak Misteri Devisa)
+           ---------------------------------------------------------------------- -->
+      <div class="game-stage-card" id="stage-mystery">
+        <div class="game-top-bar">
+          <div>
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-dark);">Game 4: Mystery Box (Peti Rahasia)</h4>
+            <span style="font-size: 0.8rem; color: var(--slate-500);">Buka 6 kotak misterius berisi teka-teki kasus dengan tingkat kesulitan berbeda!</span>
+          </div>
+          <button class="btn btn-outline-navy" style="padding: 6px 14px; font-size: 0.8rem;" onclick="resetMysteryBoxes()">
+            <span>🔄</span> Reset Peti
+          </button>
+        </div>
+
+        <!-- 6 Boxes Grid -->
+        <div class="boxes-grid" id="mysteryBoxesGrid">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for Mystery Box Riddle -->
+    <div class="mystery-modal-backdrop" id="mysteryModalBackdrop">
+      <div class="mystery-modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <h4 id="mysteryModalTitle" style="font-size: 1.2rem; font-weight: 800; color: var(--navy-dark);">Peti Misteri</h4>
+          <button class="icon-btn" onclick="closeMysteryModal()" style="border: none; background: none; font-size: 1.2rem; color: var(--slate-500); cursor: pointer;">✕</button>
+        </div>
+        <div id="mysteryModalDiff" style="font-size: 0.8rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; margin-bottom: 12px;">Tingkat: Mudah • Hadiah: 50 XP</div>
+        <p id="mysteryModalQ" style="font-size: 0.95rem; font-weight: 700; color: var(--slate-800); margin-bottom: 16px;">Loading teka-teki...</p>
+        <div id="mysteryModalOptions">
+          <!-- Injected via JS -->
+        </div>
+        <div id="mysteryModalFeedback" style="display: none;"></div>
+        <div style="text-align: right; margin-top: 18px;">
+          <button class="btn btn-outline-navy" onclick="closeMysteryModal()">Tutup Peti</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         VIEW 5: FINAL MISSION (20 Soal Pilihan Ganda Evaluasi Akhir)
+         ======================================================================== -->
+    <section id="view-finalmission" class="page-view">
+      <div class="section-head">
+        <span class="section-tag">Evaluasi Mandiri</span>
+        <h2 class="section-title">Final Mission: Ujian Akhir</h2>
+        <p class="section-desc">Uji ketuntasan belajarmu dengan 15 butir soal pilihan ganda berstandar kurikulum ekonomi kelas X SMA. Tuntaskan untuk meraih predikat Trader terbaik!</p>
+      </div>
+
+      <div class="exam-container">
+        <!-- Exam Intro Card -->
+        <div class="exam-card" id="examIntroSection" style="text-align: center;">
+          <div style="font-size: 3.5rem; margin-bottom: 16px;">📜</div>
+          <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--navy-dark); margin-bottom: 8px;">Uji Kompetensi Perdagangan Internasional</h3>
+          <p style="font-size: 0.92rem; color: var(--slate-600); max-width: 520px; margin: 0 auto 24px; line-height: 1.6;">
+            Ujian ini terdiri dari <strong>15 butir soal pilihan ganda</strong> dengan 4 opsi (A, B, C, D). Nilai akhir dihitung secara otomatis dengan rumus: <code>(Jawaban Benar / 15) &times; 100</code>.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; max-width: 440px; margin: 0 auto 28px;">
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); padding: 12px; border-radius: 10px;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--slate-500); display: block;">JUMLAH SOAL</span>
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--navy-dark);">20 Soal</span>
+            </div>
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); padding: 12px; border-radius: 10px;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--slate-500); display: block;">SKALA NILAI</span>
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--navy-dark);">0 - 100</span>
+            </div>
+            <div style="background: var(--slate-50); border: 1px solid var(--slate-200); padding: 12px; border-radius: 10px;">
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--slate-500); display: block;">PEMBAHASAN</span>
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--emerald-success);">Lengkap</span>
+            </div>
+          </div>
+
+          <button class="btn btn-gold" style="font-size: 1rem; padding: 14px 32px;" onclick="startFinalExam()">
+            <span>🚀</span> Mulai Ujian Sekarang
+          </button>
+        </div>
+
+        <!-- Exam Active Card (1 Question Per Screen) -->
+        <div class="exam-card" id="examActiveCard" style="display: none;">
+          <div class="exam-nav-header">
+            <span class="q-counter-badge" id="examCounterBadge">Soal 1 dari 20</span>
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Klik nomor untuk berpindah soal secara cepat</span>
+          </div>
+
+          <!-- Progress Bar Real-time -->
+          <div class="exam-progress-bar">
+            <div class="exam-progress-fill" id="examProgressBarFill"></div>
+          </div>
+
+          <!-- Question Palette (1 - 15) -->
+          <div class="question-palette-wrap" id="examQuestionPalette">
+            <!-- Injected via JS -->
+          </div>
+
+          <!-- Question Body -->
+          <div class="exam-question-text" id="examQuestionText">
+            Loading butir soal...
+          </div>
+
+          <!-- 4 Options (A, B, C, D) -->
+          <div class="exam-options-list" id="examOptionsList">
+            <!-- Injected via JS -->
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="exam-nav-buttons">
+            <button class="btn btn-outline-navy" id="examPrevBtn" onclick="examPrevQuestion()">
+              &larr; Sebelumnya
+            </button>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-blue" id="examNextBtn" onclick="examNextQuestion()">
+                Selanjutnya &rarr;
+              </button>
+              <button class="btn btn-gold" id="examSubmitBtn" onclick="submitFinalExam()" style="display: none;">
+                <span>📤</span> Kumpulkan Ujian
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exam Results Card (Score, Predikat & Full Review) -->
+        <div class="exam-results-card" id="examResultsCard">
+          <div class="score-circle-wrap">
+            <span class="score-num" id="examScoreNumber">0</span>
+            <span class="score-max">DARI 100</span>
+          </div>
+
+          <div class="badge-earned-pill" id="examBadgeEarnedPill">
+            <span>Penghargaan:</span> <strong>Master Trader</strong>
+          </div>
+
+          <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--navy-dark);" id="examResultTitle">Hasil Ujian Anda</h3>
+          <p style="font-size: 0.95rem; color: var(--slate-600); max-width: 500px; margin: 8px auto 28px;" id="examResultDesc">
+            Selamat telah menuntaskan evaluasi perdagangan internasional.
+          </p>
+
+          <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 30px;">
+            <button class="btn btn-gold" onclick="retakeFinalExam()">
+              <span>🔄</span> Ulangi Evaluasi
+            </button>
+            <button class="btn btn-blue" onclick="navigateTo('achievement')">
+              <span>🏆</span> Lihat Badge Anda
+            </button>
+          </div>
+
+          <!-- Detailed Review List for All 15 Questions -->
+          <div class="exam-review-container">
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-dark); margin-bottom: 16px;">
+              Pembahasan Lengkap Seluruh Soal
+            </h4>
+            <div id="examReviewList">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 6: ACHIEVEMENT (Gamifikasi: Skor, Level, XP & 10 Badges)
+         ======================================================================== -->
+    <section id="view-achievement" class="page-view">
+      <div class="section-head">
+        <span class="section-tag">Pusat Penghargaan</span>
+        <h2 class="section-title">Pencapaian & Gamifikasi</h2>
+        <p class="section-desc">Pantau akumulasi XP, kenaikan pangkat diplomatik, dan koleksi 10 medali kehormatan yang berhasil Anda raih selama proses belajar!</p>
+      </div>
+
+      <!-- Level & XP Hero Card -->
+      <div class="level-hero-card">
+        <div class="level-emblem" id="achLevelEmblem">🌱</div>
+        <div class="level-details">
+          <h3 id="achLevelName">Level 1: Calon Pedagang</h3>
+          <p id="achLevelSub">Kumpulkan XP dengan menyelesaikan modul, simulasi lab, dan game edukatif!</p>
+          <div class="level-xp-bar-wrap">
+            <div class="level-xp-bar-fill" id="achLevelXpBar"></div>
+          </div>
+          <div class="level-xp-label">
+            <span id="achLevelXpCur">0 XP</span>
+            <span id="achLevelXpMax">Target: 250 XP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 Badges Grid Showcase -->
+      <div class="badges-section-title">
+        <span>10 Badge Kehormatan Trader</span>
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--slate-500);">Koleksi Semuanya!</span>
+      </div>
+
+      <div class="badges-grid" id="badgesGridContainer">
+        <!-- 10 Badges injected via JS -->
+      </div>
+
+      <!-- Reset Progress Danger Zone -->
+      <div class="danger-zone-box">
+        <div class="danger-info">
+          <h5><span>⚠️</span> Atur Ulang (Reset) Seluruh Progres</h5>
+          <p>Jika Anda ingin mengulang seluruh perjalanan belajar dari awal, gunakan tombol reset di samping.</p>
+        </div>
+        <button class="btn btn-danger" onclick="openModal('resetModal')">
+          <span>🗑️</span> Reset Progres
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 7: PROFIL GURU (Identitas Penyusun & Pengembang Media)
+         ======================================================================== -->
+    <section id="view-profile" class="page-view">
+      <div class="section-head">
+        <span class="section-tag">Identitas Pendidik</span>
+        <h2 class="section-title">Profil Guru & Pengembang Media</h2>
+        <p class="section-desc">Mengenal lebih dekat penyusun Media Pembelajaran Interaktif (MPI) TRADE QUEST dari Universitas Pendidikan Ganesha.</p>
+      </div>
+
+      <div class="teacher-profile-card">
+        <div class="teacher-grid">
+
+          <!-- Kolom Foto & Avatar -->
+          <div class="teacher-photo-col">
+            <div class="teacher-avatar-frame">
+              <div class="teacher-avatar-inner">
+                <!-- Illustrated Teacher SVG Avatar -->
+                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Body / Silhouette -->
+                  <circle cx="40" cy="28" r="16" fill="#bfdbfe" stroke="#93c5fd" stroke-width="1.5"/>
+                  <!-- Hair -->
+                  <path d="M24 24 C24 10, 56 10, 56 24 C56 18, 50 14, 40 14 C30 14, 24 18, 24 24Z" fill="#1e3a8a"/>
+                  <!-- Face -->
+                  <circle cx="40" cy="29" r="13" fill="#fde68a"/>
+                  <!-- Eyes -->
+                  <circle cx="35" cy="27" r="2" fill="#1e293b"/>
+                  <circle cx="45" cy="27" r="2" fill="#1e293b"/>
+                  <circle cx="35.6" cy="26.4" r="0.6" fill="white"/>
+                  <circle cx="45.6" cy="26.4" r="0.6" fill="white"/>
+                  <!-- Smile -->
+                  <path d="M36 33 Q40 37 44 33" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Collar / Uniform -->
+                  <path d="M27 44 Q40 54 53 44 L56 56 Q40 65 24 56Z" fill="#1d4ed8"/>
+                  <!-- Graduation Cap -->
+                  <rect x="28" y="13" width="24" height="4" rx="1" fill="#1e293b"/>
+                  <polygon points="40,8 52,13 28,13" fill="#1e293b"/>
+                  <line x1="52" y1="13" x2="54" y2="20" stroke="#f59e0b" stroke-width="2"/>
+                  <circle cx="54" cy="21" r="2" fill="#f59e0b"/>
+                </svg>
+              </div>
+              <div class="teacher-verified-badge" title="Penyusun Terverifikasi">✓</div>
+            </div>
+            <span class="undiksha-pill">
+              <span>🏛️</span> UNDIKSHA
+            </span>
+            <span style="font-size: 0.75rem; color: var(--slate-500); font-weight: 600; text-align: center; line-height: 1.4;">Mahasiswa<br>Pendidikan Ekonomi</span>
+          </div>
+
+          <!-- Kolom Informasi Lengkap -->
+          <div class="teacher-info-col">
+            <div style="display: inline-block; background: #fef9c3; color: #78350f; font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; border: 1px solid #fde68a;">
+              Pengembang Media Pembelajaran
+            </div>
+            <h3>Akfini Gina Afafa</h3>
+            <div class="teacher-role-sub">Universitas Pendidikan Ganesha &bull; Pendidikan Ekonomi</div>
+
+            <p class="teacher-bio-p">
+              Media Pembelajaran Interaktif (MPI) bertajuk <strong>TRADE QUEST: Misi Menjelajahi Dunia Perdagangan</strong> ini dirancang sebagai media pembelajaran inovatif untuk mata pelajaran <strong>Ekonomi Kelas X SMA</strong> pada materi <em>Perdagangan Internasional</em>. Menggabungkan konten visual modern, video kontekstual, simulasi kebijakan, dan gamifikasi 10 badge untuk menciptakan pengalaman belajar yang bermakna dan menyenangkan.
+            </p>
+
+            <!-- Tabel Identitas -->
+            <div class="teacher-identity-table">
+              <div class="id-card-cell">
+                <span class="id-label">Nama Lengkap</span>
+                <span class="id-val">Akfini Gina Afafa</span>
+              </div>
+              <div class="id-card-cell">
+                <span class="id-label">NIM</span>
+                <span class="id-val">2417011083</span>
+              </div>
+              <div class="id-card-cell">
+                <span class="id-label">Perguruan Tinggi</span>
+                <span class="id-val">Universitas Pendidikan Ganesha</span>
+              </div>
+              <div class="id-card-cell">
+                <span class="id-label">Program Studi</span>
+                <span class="id-val">Pendidikan Ekonomi</span>
+              </div>
+              <div class="id-card-cell">
+                <span class="id-label">Jurusan</span>
+                <span class="id-val">Ekonomi dan Akuntansi</span>
+              </div>
+              <div class="id-card-cell">
+                <span class="id-label">Mata Pelajaran</span>
+                <span class="id-val">Ekonomi SMA / Perdagangan Internasional</span>
+              </div>
+            </div>
+
+            <!-- Kutipan Motivasi -->
+            <div class="quote-educator-box">
+              &ldquo;Memahami dinamika perdagangan internasional bukan sekadar menghafal angka neraca ekspor-impor, melainkan melatih nalar kritis generasi muda tentang bagaimana suatu bangsa mampu berdaulat, berkolaborasi secara adil, dan menghadirkan nilai tambah bagi kesejahteraan masyarakat dunia.&rdquo;
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px;">
+              <button class="btn btn-gold" onclick="navigateTo('explore')">
+                <span>📖</span> Mulai Belajar Bersama
+              </button>
+              <button class="btn btn-blue" onclick="navigateTo('tradelab')">
+                <span>⚖️</span> Coba Simulasi Trade Lab
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL RESET PROGRES DENGAN KONFIRMASI
+       ========================================================================== -->
+  <div class="modal-overlay" id="resetModal">
+    <div class="modal-card">
+      <div class="modal-icon-danger">⚠️</div>
+      <h4>Konfirmasi Reset Progres</h4>
+      <p>
+        Apakah Anda yakin ingin menghapus seluruh progres belajar, skor, XP, dan badge yang telah diraih? Tindakan ini tidak dapat dibatalkan.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-outline-navy" onclick="closeModal('resetModal')">Batal</button>
+        <button class="btn btn-danger" onclick="resetAllProgress()">Ya, Reset Sekarang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification -->
+  <div class="toast-wrap" id="toastNotification">
+    <span id="toastIcon">✨</span>
+    <span id="toastMessage">Selamat datang di TRADE QUEST!</span>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span>🚢</span>
+        <span>TRADE QUEST &copy; 2026 • Oleh: <strong>Akfini Gina Afafa</strong> (UNDIKSHA) • Ekonomi SMA Kelas X</span>
+      </div>
+      <div class="footer-links">
+        <a href="#home" onclick="navigateTo('home')">Beranda</a>
+        <a href="#explore" onclick="navigateTo('explore')">Explore</a>
+        <a href="#tradelab" onclick="navigateTo('tradelab')">Trade Lab</a>
+        <a href="#challenge" onclick="navigateTo('challenge')">Challenge</a>
+        <a href="#finalmission" onclick="navigateTo('finalmission')">Final Mission</a>
+        <a href="#achievement" onclick="navigateTo('achievement')">Achievement</a>
+        <a href="#profile" onclick="navigateTo('profile')">Profil Guru</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script JavaScript Murni -->
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
